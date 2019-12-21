@@ -1,6 +1,12 @@
 package com.company.sorting;
 
 public class QuickSort {
+
+    //Time Complexity: Best: O(n log(n)), Average: O(n log(n)), Worst: O(n^2) [Depending on pivot selection, like if we are selecting\
+    //last element as pivot, and they array is reversed sorted, on each iteration, the pivot will only go one step to left, making
+    //complexity O(n^2)]
+    //Space complexity: O(log(n))
+
     public static int[] doQuickSort(int[] arrayToSort) {
         divideAndSort(arrayToSort, 0, arrayToSort.length - 1);
         return arrayToSort;

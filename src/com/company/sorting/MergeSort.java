@@ -3,6 +3,10 @@ package com.company.sorting;
 import java.util.Arrays;
 
 public class MergeSort {
+
+    //Time Complexity: Best: O(n log(n)), Average: O(n log(n)), Worst: O(n log(n)) [log(n) steps * n comparisons in each step]
+    //Space complexity: O(n)
+
     public static int[] doMergeSort(int[] arrayToSort) {
         return divide(arrayToSort);
     }

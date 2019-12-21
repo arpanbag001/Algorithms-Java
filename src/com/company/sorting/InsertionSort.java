@@ -2,6 +2,10 @@ package com.company.sorting;
 
 public class InsertionSort {
 
+    //Time Complexity: Best: O(n), Average: O(n^2), Worst: O(n^2) [Best, when array is already sorted. Otherwise will always
+    //iterate through the whole array for each element, making complexity O(n^2)
+    //Space complexity: O(1)
+
     public static int[] doInsertionSort(int[] arrayToSort) {
 
         for (int i = 1; i < arrayToSort.length; i++) {

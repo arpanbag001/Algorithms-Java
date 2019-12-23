@@ -1,18 +1,34 @@
 package com.company;
 
-import com.company.recursion.Factorial;
-import com.company.recursion.Fibonacci;
-import com.company.recursion.StringReverser;
-import com.company.searching.BinarySearch;
-import com.company.searching.LinearSearch;
-import com.company.sorting.*;
-
-import java.util.Arrays;
+import com.company.datastructures.MyBinarySearchTree;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println(BinarySearch.doBinarySearch(new int[]{-23, -5, -2, 0, 2, 7, 8, 12, 45, 99, 121, 213, 343}, -233));
+        MyBinarySearchTree myBinarySearchTree = new MyBinarySearchTree();
+
+        myBinarySearchTree.insert(4);
+        myBinarySearchTree.insert(2);
+        myBinarySearchTree.insert(3);
+        myBinarySearchTree.insert(1);
+        myBinarySearchTree.insert(6);
+        myBinarySearchTree.insert(7);
+        myBinarySearchTree.insert(5);
+
+//        myBinarySearchTree.traversalInorder(myBinarySearchTree.getRoot());
+//        System.out.println("\n\n" + myBinarySearchTree.getRoot().value);
+//        System.out.println("\n\n" + myBinarySearchTree.getRoot().left.left.value);
+//        System.out.println("\n\n" + myBinarySearchTree.getRoot().right.left.value);
+
+        /*
+                       4
+                   2        6
+                1    3     5    7
+
+         */
+
+        myBinarySearchTree.traverseDepthFirstPostOrder(myBinarySearchTree.getRoot());
+
     }
 }

@@ -2,6 +2,16 @@ package com.company.datastructures;
 
 public class MyBinarySearchTree {
 
+    public static class Node {
+        public int value;
+        public Node left;
+        public Node right;
+
+        Node(int value) {
+            this.value = value;
+        }
+    }
+
     private Node root;
 
     public Node insert(int value) {
@@ -34,14 +44,6 @@ public class MyBinarySearchTree {
         return root;
     }
 
-    public void traversalInorder(Node node) {
-        if (node == null)
-            return;
-        traversalInorder(node.left);
-        System.out.println(node.value);
-        traversalInorder(node.right);
-    }
-
     private Node traverseToNodeWithClosestValue(int value) {
         Node currentNode = root;
         while (true) {
@@ -65,13 +67,32 @@ public class MyBinarySearchTree {
         }
     }
 
-    static class Node {
-        int value;
-        Node left;
-        Node right;
 
-        Node(int value) {
-            this.value = value;
-        }
+    //              *** Traversals ***
+
+    public void traverseDepthFirstInOrder(Node node) {
+        if (node == null)
+            return;
+        traverseDepthFirstInOrder(node.left);
+        System.out.println(node.value);
+        traverseDepthFirstInOrder(node.right);
     }
+
+    public void traverseDepthFirstPreOrder(Node node) {
+        if (node == null)
+            return;
+        System.out.println(node.value);
+        traverseDepthFirstPreOrder(node.left);
+        traverseDepthFirstPreOrder(node.right);
+    }
+
+    public void traverseDepthFirstPostOrder(Node node) {
+        if (node == null)
+            return;
+        traverseDepthFirstPostOrder(node.left);
+        traverseDepthFirstPostOrder(node.right);
+        System.out.println(node.value);
+    }
+
+
 }

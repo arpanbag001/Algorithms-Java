@@ -90,6 +90,19 @@ public class MyBinarySearchTree {
         traverseBreadthFirst();
     }
 
+    public void traverseBreadthFirstIteratively() {
+        breadthFirstTraversalQueue = new LinkedList<>();
+        breadthFirstTraversalQueue.add(getRoot());
+        while (!breadthFirstTraversalQueue.isEmpty()) {
+            Node node = breadthFirstTraversalQueue.poll();
+            System.out.println(node.value);
+            if (node.left != null)
+                breadthFirstTraversalQueue.add(node.left);
+            if (node.right != null)
+                breadthFirstTraversalQueue.add(node.right);
+        }
+    }
+
     public void traverseDepthFirstInOrder(Node node) {
         if (node == null)
             return;

@@ -28,7 +28,7 @@ public class Main {
 
          */
 
-        myBinarySearchTree.traverseDepthFirstPostOrder(myBinarySearchTree.getRoot());
+        myBinarySearchTree.traverseBreadthFirst();
 
     }
 }

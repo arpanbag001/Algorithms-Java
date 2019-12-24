@@ -1,5 +1,8 @@
 package com.company.datastructures;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class MyBinarySearchTree {
 
     public static class Node {
@@ -13,6 +16,7 @@ public class MyBinarySearchTree {
     }
 
     private Node root;
+    private Queue<Node> breadthFirstTraversalQueue;
 
     public Node insert(int value) {
         Node newNode = new Node(value);
@@ -69,6 +73,22 @@ public class MyBinarySearchTree {
 
 
     //              *** Traversals ***
+
+    public void traverseBreadthFirst() {
+        if (breadthFirstTraversalQueue == null) {
+            breadthFirstTraversalQueue = new LinkedList<>();
+            breadthFirstTraversalQueue.add(getRoot());
+        }
+        if (breadthFirstTraversalQueue.isEmpty())
+            return;
+        Node node = breadthFirstTraversalQueue.poll();
+        System.out.println(node.value);
+        if (node.left != null)
+            breadthFirstTraversalQueue.add(node.left);
+        if (node.right != null)
+            breadthFirstTraversalQueue.add(node.right);
+        traverseBreadthFirst();
+    }
 
     public void traverseDepthFirstInOrder(Node node) {
         if (node == null)

@@ -74,37 +74,32 @@ public class MyGraphUndirectedUnweighted {
     }
 
     public void traverseDepthFirstPreOrder(int rootNode, int graphType) {
-        //Preprocessing: Initializing datastores and adding rootnode
-        Stack<Integer> depthFirstTraversalStack = new Stack<>();
-        depthFirstTraversalStack.add(rootNode);
+        //Preprocessing: Initializing datastores
         HashSet<Integer> visitedNodeSet = new HashSet<>();
 
-        traverseDepthFirstPreOrderRecursively(graphType, depthFirstTraversalStack, visitedNodeSet);
+        traverseDepthFirstPreOrderRecursively(rootNode, graphType, visitedNodeSet);
     }
 
-    private void traverseDepthFirstPreOrderRecursively(int graphType, Stack<Integer> depthFirstTraversalStack, HashSet<Integer> visitedNodeSet) {
-
-        if (depthFirstTraversalStack.isEmpty())
-            return;
-
-        int currNode = depthFirstTraversalStack.pop();
+    private void traverseDepthFirstPreOrderRecursively(int currNode, int graphType, HashSet<Integer> visitedNodeSet) {
 
         if (!visitedNodeSet.contains(currNode)) {
             System.out.println(currNode);
             visitedNodeSet.add(currNode);
-            if (graphType == GRAPH_TYPE_ADJACENCY_LIST)
-                depthFirstTraversalStack.addAll(adjacentList.get(currNode));
-            else if (graphType == GRAPH_TYPE_EDGE_LIST) {
+            if (graphType == GRAPH_TYPE_ADJACENCY_LIST) {
+                HashSet<Integer> adjacentVertices = adjacentList.get(currNode);
+                for (int adjacentVertex : adjacentVertices) {
+                    traverseDepthFirstPreOrderRecursively(adjacentVertex, graphType, visitedNodeSet);
+                }
+            } else if (graphType == GRAPH_TYPE_EDGE_LIST) {
                 for (Edge edge : edgeList) {
                     if (edge.node1 == currNode)
-                        depthFirstTraversalStack.add(edge.node2);
+                        traverseDepthFirstPreOrderRecursively(edge.node2, graphType, visitedNodeSet);
                     else if (edge.node2 == currNode)
-                        depthFirstTraversalStack.add(edge.node1);
+                        traverseDepthFirstPreOrderRecursively(edge.node1, graphType, visitedNodeSet);
                 }
             }
         }
 
-        traverseDepthFirstPreOrderRecursively(graphType, depthFirstTraversalStack, visitedNodeSet);
     }
 
     private static class Edge {

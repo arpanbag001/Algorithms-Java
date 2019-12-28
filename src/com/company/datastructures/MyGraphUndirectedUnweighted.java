@@ -2,6 +2,8 @@ package com.company.datastructures;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class MyGraphUndirectedUnweighted {
 
@@ -36,6 +38,33 @@ public class MyGraphUndirectedUnweighted {
             System.out.println(adjacentList.toString());
         else if (printGraphType == GRAPH_TYPE_EDGE_LIST)
             edgeList.forEach(edge -> System.out.println(edge.getEdge()));
+    }
+
+
+    public void traverseBreadthFirst(int rootNode) {
+
+        //Preprocessing: Initializing datastores and adding rootnode
+        Queue<Integer> breadthFirstTraversalQueue = new LinkedList<>();
+        breadthFirstTraversalQueue.add(rootNode);
+        HashSet<Integer> visitedNodeSet = new HashSet<>();
+
+        traverseBreadthFirstRecursively(breadthFirstTraversalQueue, visitedNodeSet);
+    }
+
+    private void traverseBreadthFirstRecursively(Queue<Integer> breadthFirstTraversalQueue, HashSet<Integer> visitedNodeSet) {
+
+        if (breadthFirstTraversalQueue.isEmpty())
+            return;
+
+        int currNode = breadthFirstTraversalQueue.poll();
+
+        if (!visitedNodeSet.contains(currNode)) {
+            System.out.println(currNode);
+            visitedNodeSet.add(currNode);
+            breadthFirstTraversalQueue.addAll(adjacentList.get(currNode));
+        }
+
+        traverseBreadthFirstRecursively(breadthFirstTraversalQueue, visitedNodeSet);
     }
 
     private static class Edge {

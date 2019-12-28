@@ -1,34 +1,38 @@
 package com.company;
 
 import com.company.datastructures.MyBinarySearchTree;
+import com.company.datastructures.MyGraphUndirectedUnweighted;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        MyBinarySearchTree myBinarySearchTree = new MyBinarySearchTree();
+        MyGraphUndirectedUnweighted myGraphUndirectedUnweighted = new MyGraphUndirectedUnweighted();
 
-        myBinarySearchTree.insert(4);
-        myBinarySearchTree.insert(2);
-        myBinarySearchTree.insert(3);
-        myBinarySearchTree.insert(1);
-        myBinarySearchTree.insert(6);
-        myBinarySearchTree.insert(7);
-        myBinarySearchTree.insert(5);
+        myGraphUndirectedUnweighted.addVertex(2);
+        myGraphUndirectedUnweighted.addVertex(4);
+        myGraphUndirectedUnweighted.addVertex(6);
+        myGraphUndirectedUnweighted.addVertex(8);
+        myGraphUndirectedUnweighted.addVertex(10);
+        myGraphUndirectedUnweighted.addVertex(12);
 
-//        myBinarySearchTree.traversalInorder(myBinarySearchTree.getRoot());
-//        System.out.println("\n\n" + myBinarySearchTree.getRoot().value);
-//        System.out.println("\n\n" + myBinarySearchTree.getRoot().left.left.value);
-//        System.out.println("\n\n" + myBinarySearchTree.getRoot().right.left.value);
+        myGraphUndirectedUnweighted.addEdge(2, 4);
+        myGraphUndirectedUnweighted.addEdge(4, 8);
+        myGraphUndirectedUnweighted.addEdge(4, 6);
+        myGraphUndirectedUnweighted.addEdge(8, 10);
+        myGraphUndirectedUnweighted.addEdge(10, 12);
+        myGraphUndirectedUnweighted.addEdge(6, 12);
 
         /*
-                       4
-                   2        6
-                1    3     5    7
+
+             6-----------
+             |          |
+         2---4---8--10--12
+             |___|
 
          */
-
-        myBinarySearchTree.traverseDepthFirstPostOrderIteratively();
+        //myGraphUndirectedUnweighted.printGraph(MyGraphUndirectedUnweighted.GRAPH_TYPE_ADJACENCY_LIST);
+        myGraphUndirectedUnweighted.traverseBreadthFirst(2);
 
     }
 }

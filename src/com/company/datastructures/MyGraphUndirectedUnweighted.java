@@ -41,17 +41,17 @@ public class MyGraphUndirectedUnweighted {
     }
 
 
-    public void traverseBreadthFirst(int rootNode) {
+    public void traverseBreadthFirst(int rootNode, int graphType) {
 
         //Preprocessing: Initializing datastores and adding rootnode
         Queue<Integer> breadthFirstTraversalQueue = new LinkedList<>();
         breadthFirstTraversalQueue.add(rootNode);
         HashSet<Integer> visitedNodeSet = new HashSet<>();
 
-        traverseBreadthFirstRecursively(breadthFirstTraversalQueue, visitedNodeSet);
+        traverseBreadthFirstRecursively(graphType, breadthFirstTraversalQueue, visitedNodeSet);
     }
 
-    private void traverseBreadthFirstRecursively(Queue<Integer> breadthFirstTraversalQueue, HashSet<Integer> visitedNodeSet) {
+    private void traverseBreadthFirstRecursively(int graphType, Queue<Integer> breadthFirstTraversalQueue, HashSet<Integer> visitedNodeSet) {
 
         if (breadthFirstTraversalQueue.isEmpty())
             return;
@@ -61,10 +61,19 @@ public class MyGraphUndirectedUnweighted {
         if (!visitedNodeSet.contains(currNode)) {
             System.out.println(currNode);
             visitedNodeSet.add(currNode);
-            breadthFirstTraversalQueue.addAll(adjacentList.get(currNode));
+            if (graphType == GRAPH_TYPE_ADJACENCY_LIST)
+                breadthFirstTraversalQueue.addAll(adjacentList.get(currNode));
+            else if (graphType == GRAPH_TYPE_EDGE_LIST) {
+                for (Edge edge : edgeList) {
+                    if (edge.node1 == currNode)
+                        breadthFirstTraversalQueue.add(edge.node2);
+                    else if (edge.node2 == currNode)
+                        breadthFirstTraversalQueue.add(edge.node1);
+                }
+            }
         }
 
-        traverseBreadthFirstRecursively(breadthFirstTraversalQueue, visitedNodeSet);
+        traverseBreadthFirstRecursively(graphType, breadthFirstTraversalQueue, visitedNodeSet);
     }
 
     private static class Edge {

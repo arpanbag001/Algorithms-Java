@@ -15,6 +15,8 @@ public class Main {
         myGraphUndirectedUnweighted.addVertex(8);
         myGraphUndirectedUnweighted.addVertex(10);
         myGraphUndirectedUnweighted.addVertex(12);
+        myGraphUndirectedUnweighted.addVertex(14);
+        myGraphUndirectedUnweighted.addVertex(16);
 
         myGraphUndirectedUnweighted.addEdge(2, 4);
         myGraphUndirectedUnweighted.addEdge(4, 8);
@@ -22,17 +24,21 @@ public class Main {
         myGraphUndirectedUnweighted.addEdge(8, 10);
         myGraphUndirectedUnweighted.addEdge(10, 12);
         myGraphUndirectedUnweighted.addEdge(6, 12);
+        myGraphUndirectedUnweighted.addEdge(8, 14);
+        myGraphUndirectedUnweighted.addEdge(10, 16);
 
         /*
 
              6-----------
              |          |
          2---4---8--10--12
-             |___|
+             |___|  |
+                 |  |
+                14   16
 
          */
-        //myGraphUndirectedUnweighted.printGraph(MyGraphUndirectedUnweighted.GRAPH_TYPE_ADJACENCY_LIST);
-        myGraphUndirectedUnweighted.traverseBreadthFirst(2);
+        //myGraphUndirectedUnweighted.printGraph(MyGraphUndirectedUnweighted.GRAPH_TYPE_EDGE_LIST);
+        myGraphUndirectedUnweighted.traverseBreadthFirst(2, MyGraphUndirectedUnweighted.GRAPH_TYPE_EDGE_LIST);
 
     }
 }

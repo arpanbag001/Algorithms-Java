@@ -1,9 +1,6 @@
 package com.company.datastructures;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class MyGraphUndirectedUnweighted {
 
@@ -74,6 +71,40 @@ public class MyGraphUndirectedUnweighted {
         }
 
         traverseBreadthFirstRecursively(graphType, breadthFirstTraversalQueue, visitedNodeSet);
+    }
+
+    public void traverseDepthFirstPreOrder(int rootNode, int graphType) {
+        //Preprocessing: Initializing datastores and adding rootnode
+        Stack<Integer> depthFirstTraversalStack = new Stack<>();
+        depthFirstTraversalStack.add(rootNode);
+        HashSet<Integer> visitedNodeSet = new HashSet<>();
+
+        traverseDepthFirstPreOrderRecursively(graphType, depthFirstTraversalStack, visitedNodeSet);
+    }
+
+    private void traverseDepthFirstPreOrderRecursively(int graphType, Stack<Integer> depthFirstTraversalStack, HashSet<Integer> visitedNodeSet) {
+
+        if (depthFirstTraversalStack.isEmpty())
+            return;
+
+        int currNode = depthFirstTraversalStack.pop();
+
+        if (!visitedNodeSet.contains(currNode)) {
+            System.out.println(currNode);
+            visitedNodeSet.add(currNode);
+            if (graphType == GRAPH_TYPE_ADJACENCY_LIST)
+                depthFirstTraversalStack.addAll(adjacentList.get(currNode));
+            else if (graphType == GRAPH_TYPE_EDGE_LIST) {
+                for (Edge edge : edgeList) {
+                    if (edge.node1 == currNode)
+                        depthFirstTraversalStack.add(edge.node2);
+                    else if (edge.node2 == currNode)
+                        depthFirstTraversalStack.add(edge.node1);
+                }
+            }
+        }
+
+        traverseDepthFirstPreOrderRecursively(graphType, depthFirstTraversalStack, visitedNodeSet);
     }
 
     private static class Edge {

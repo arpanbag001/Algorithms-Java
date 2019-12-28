@@ -1,6 +1,5 @@
 package com.company;
 
-import com.company.datastructures.MyBinarySearchTree;
 import com.company.datastructures.MyGraphUndirectedUnweighted;
 
 public class Main {
@@ -38,7 +37,7 @@ public class Main {
 
          */
         //myGraphUndirectedUnweighted.printGraph(MyGraphUndirectedUnweighted.GRAPH_TYPE_EDGE_LIST);
-        myGraphUndirectedUnweighted.traverseBreadthFirst(2, MyGraphUndirectedUnweighted.GRAPH_TYPE_EDGE_LIST);
+        myGraphUndirectedUnweighted.traverseDepthFirstPreOrder(2, MyGraphUndirectedUnweighted.GRAPH_TYPE_ADJACENCY_LIST);
 
     }
 }

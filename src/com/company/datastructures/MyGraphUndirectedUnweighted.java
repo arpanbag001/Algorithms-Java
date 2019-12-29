@@ -128,6 +128,32 @@ public class MyGraphUndirectedUnweighted {
         }
     }
 
+    public void traverseDepthFirstIteratively(int rootNode, int graphType) {
+
+        //Preprocessing: Initializing datastores and adding rootnode
+        Stack<Integer> depthFirstTraversalStack = new Stack<>();
+        depthFirstTraversalStack.add(rootNode);
+        HashSet<Integer> visitedNodeSet = new HashSet<>();
+
+        while (!depthFirstTraversalStack.isEmpty()) {
+            int currNode = depthFirstTraversalStack.pop();
+            if (!visitedNodeSet.contains(currNode)) {
+                System.out.println(currNode);
+                visitedNodeSet.add(currNode);
+                if (graphType == GRAPH_TYPE_ADJACENCY_LIST)
+                    depthFirstTraversalStack.addAll(adjacentList.get(currNode));
+                else if (graphType == GRAPH_TYPE_EDGE_LIST) {
+                    for (Edge edge : edgeList) {
+                        if (edge.node1 == currNode)
+                            depthFirstTraversalStack.add(edge.node2);
+                        else if (edge.node2 == currNode)
+                            depthFirstTraversalStack.add(edge.node1);
+                    }
+                }
+            }
+        }
+    }
+
     private static class Edge {
         int node1;
         int node2;

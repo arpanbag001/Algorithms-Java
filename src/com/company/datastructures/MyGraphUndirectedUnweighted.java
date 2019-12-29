@@ -102,6 +102,32 @@ public class MyGraphUndirectedUnweighted {
 
     }
 
+    public void traverseBreadthFirstIteratively(int rootNode, int graphType) {
+
+        //Preprocessing: Initializing datastores and adding rootnode
+        Queue<Integer> breadthFirstTraversalQueue = new LinkedList<>();
+        breadthFirstTraversalQueue.add(rootNode);
+        HashSet<Integer> visitedNodeSet = new HashSet<>();
+
+        while (!breadthFirstTraversalQueue.isEmpty()) {
+            int currNode = breadthFirstTraversalQueue.poll();
+            if (!visitedNodeSet.contains(currNode)) {
+                System.out.println(currNode);
+                visitedNodeSet.add(currNode);
+                if (graphType == GRAPH_TYPE_ADJACENCY_LIST)
+                    breadthFirstTraversalQueue.addAll(adjacentList.get(currNode));
+                else if (graphType == GRAPH_TYPE_EDGE_LIST) {
+                    for (Edge edge : edgeList) {
+                        if (edge.node1 == currNode)
+                            breadthFirstTraversalQueue.add(edge.node2);
+                        else if (edge.node2 == currNode)
+                            breadthFirstTraversalQueue.add(edge.node1);
+                    }
+                }
+            }
+        }
+    }
+
     private static class Edge {
         int node1;
         int node2;

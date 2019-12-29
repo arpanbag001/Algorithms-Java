@@ -9,6 +9,8 @@ public class MyGraphUndirectedUnweighted {
     private HashSet<Edge> edgeList = new HashSet<>();
     public static final int GRAPH_TYPE_ADJACENCY_LIST = 1;
     public static final int GRAPH_TYPE_EDGE_LIST = 2;
+    public static final int SEARCH_KEY_UNDEFINED = -1;
+    public static final int SEARCH_RESULT_NOT_FOUND = 404;
 
     public void addVertex(int node) {
         adjacentList.put(node, new HashSet<>());
@@ -38,39 +40,47 @@ public class MyGraphUndirectedUnweighted {
     }
 
 
-    public void traverseBreadthFirst(int rootNode, int graphType) {
+    public void traverseBreadthFirst(int rootNode, int searchKey, int graphType) {
 
         //Preprocessing: Initializing datastores and adding rootnode
         Queue<Integer> breadthFirstTraversalQueue = new LinkedList<>();
         breadthFirstTraversalQueue.add(rootNode);
         HashSet<Integer> visitedNodeSet = new HashSet<>();
 
-        traverseBreadthFirstRecursively(graphType, breadthFirstTraversalQueue, visitedNodeSet);
+        int searchResult = traverseBreadthFirstRecursively(graphType, searchKey, breadthFirstTraversalQueue, visitedNodeSet);
+
+        if (searchKey != SEARCH_KEY_UNDEFINED && searchResult == SEARCH_RESULT_NOT_FOUND)
+            System.out.println("\n" + searchKey + " not found!");
     }
 
-    private void traverseBreadthFirstRecursively(int graphType, Queue<Integer> breadthFirstTraversalQueue, HashSet<Integer> visitedNodeSet) {
+    private int traverseBreadthFirstRecursively(int graphType, int searchKey, Queue<Integer> breadthFirstTraversalQueue, HashSet<Integer> visitedNodeSet) {
 
         if (breadthFirstTraversalQueue.isEmpty())
-            return;
+            return SEARCH_RESULT_NOT_FOUND;
 
         int currNode = breadthFirstTraversalQueue.poll();
 
-        if (!visitedNodeSet.contains(currNode)) {
-            System.out.println(currNode);
-            visitedNodeSet.add(currNode);
-            if (graphType == GRAPH_TYPE_ADJACENCY_LIST)
-                breadthFirstTraversalQueue.addAll(adjacentList.get(currNode));
-            else if (graphType == GRAPH_TYPE_EDGE_LIST) {
-                for (Edge edge : edgeList) {
-                    if (edge.node1 == currNode)
-                        breadthFirstTraversalQueue.add(edge.node2);
-                    else if (edge.node2 == currNode)
-                        breadthFirstTraversalQueue.add(edge.node1);
+        if (searchKey != SEARCH_KEY_UNDEFINED && currNode == searchKey) {
+            System.out.println(searchKey + " found!");
+            return searchKey;
+        } else {
+            if (!visitedNodeSet.contains(currNode)) {
+                System.out.println(currNode);
+                visitedNodeSet.add(currNode);
+                if (graphType == GRAPH_TYPE_ADJACENCY_LIST)
+                    breadthFirstTraversalQueue.addAll(adjacentList.get(currNode));
+                else if (graphType == GRAPH_TYPE_EDGE_LIST) {
+                    for (Edge edge : edgeList) {
+                        if (edge.node1 == currNode)
+                            breadthFirstTraversalQueue.add(edge.node2);
+                        else if (edge.node2 == currNode)
+                            breadthFirstTraversalQueue.add(edge.node1);
+                    }
                 }
             }
+            return traverseBreadthFirstRecursively(graphType, searchKey, breadthFirstTraversalQueue, visitedNodeSet);
         }
 
-        traverseBreadthFirstRecursively(graphType, breadthFirstTraversalQueue, visitedNodeSet);
     }
 
     public void traverseDepthFirst(int rootNode, int graphType) {

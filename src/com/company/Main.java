@@ -37,7 +37,7 @@ public class Main {
 
          */
         //myGraphUndirectedUnweighted.printGraph(MyGraphUndirectedUnweighted.GRAPH_TYPE_EDGE_LIST);
-        myGraphUndirectedUnweighted.traverseDepthFirstPreOrder(2, MyGraphUndirectedUnweighted.GRAPH_TYPE_ADJACENCY_LIST);
+        myGraphUndirectedUnweighted.traverseDepthFirst(2, MyGraphUndirectedUnweighted.GRAPH_TYPE_ADJACENCY_LIST);
 
     }
 }

@@ -73,14 +73,14 @@ public class MyGraphUndirectedUnweighted {
         traverseBreadthFirstRecursively(graphType, breadthFirstTraversalQueue, visitedNodeSet);
     }
 
-    public void traverseDepthFirstPreOrder(int rootNode, int graphType) {
+    public void traverseDepthFirst(int rootNode, int graphType) {
         //Preprocessing: Initializing datastores
         HashSet<Integer> visitedNodeSet = new HashSet<>();
 
-        traverseDepthFirstPreOrderRecursively(rootNode, graphType, visitedNodeSet);
+        traverseDepthFirstRecursively(rootNode, graphType, visitedNodeSet);
     }
 
-    private void traverseDepthFirstPreOrderRecursively(int currNode, int graphType, HashSet<Integer> visitedNodeSet) {
+    private void traverseDepthFirstRecursively(int currNode, int graphType, HashSet<Integer> visitedNodeSet) {
 
         if (!visitedNodeSet.contains(currNode)) {
             System.out.println(currNode);
@@ -88,14 +88,14 @@ public class MyGraphUndirectedUnweighted {
             if (graphType == GRAPH_TYPE_ADJACENCY_LIST) {
                 HashSet<Integer> adjacentVertices = adjacentList.get(currNode);
                 for (int adjacentVertex : adjacentVertices) {
-                    traverseDepthFirstPreOrderRecursively(adjacentVertex, graphType, visitedNodeSet);
+                    traverseDepthFirstRecursively(adjacentVertex, graphType, visitedNodeSet);
                 }
             } else if (graphType == GRAPH_TYPE_EDGE_LIST) {
                 for (Edge edge : edgeList) {
                     if (edge.node1 == currNode)
-                        traverseDepthFirstPreOrderRecursively(edge.node2, graphType, visitedNodeSet);
+                        traverseDepthFirstRecursively(edge.node2, graphType, visitedNodeSet);
                     else if (edge.node2 == currNode)
-                        traverseDepthFirstPreOrderRecursively(edge.node1, graphType, visitedNodeSet);
+                        traverseDepthFirstRecursively(edge.node1, graphType, visitedNodeSet);
                 }
             }
         }

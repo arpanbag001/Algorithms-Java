@@ -6,7 +6,7 @@ public class Fibonacci {
     private static int[] dynamicProgrammingMemo;
 
 
-    //Iterative approach
+    //Iterative approach. Time complexity: O(n). Space complexity: O(1)
     public static int fibonacciIterative(int index) {
 
         //Seed values
@@ -29,7 +29,7 @@ public class Fibonacci {
     }
 
 
-    //Recursive approach
+    //Recursive approach. Time complexity: O(2^n). Space complexity: O(1)
     public static int fibonacciRecursive(int index) {
 
         //Seed values
@@ -42,7 +42,7 @@ public class Fibonacci {
     }
 
 
-    //Dynamic programming
+    //Dynamic programming. Time complexity: O(n). Space complexity: O(n)
     public static int fibonacciRecursiveWithDynamicProgramming(int index) {
 
         if (dynamicProgrammingMemo == null)

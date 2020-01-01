@@ -1,17 +1,16 @@
 package com.company;
 
-import com.company.dynamicprogramming.Fibonacci;
-import com.company.utils.PerformanceMeasurer;
+import com.company.dynamicprogramming.BinaryKnapsack;
 
 public class Main {
 
     public static void main(String[] args) {
 
 
-        System.out.println(Fibonacci.fibonacciRecursiveWithDynamicProgramming(25));
+        System.out.println(BinaryKnapsack.binaryKnapsackGreedy(new int[]{60, 100, 120}, new int[]{10, 20, 30}, 50));
 
 
-        System.out.println("Number of operations: " + Fibonacci.numberOfOperations);
+//        System.out.println("Number of operations: " + Fibonacci.numberOfOperations);
 
 //        PerformanceMeasurer.measurePerformance(() ->
 //                        Fibonacci.fibonacciRecursiveWithDynamicProgramming(25),

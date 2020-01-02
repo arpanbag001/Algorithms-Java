@@ -60,6 +60,13 @@ public class BinaryKnapsack {
 
     //      ****** Optimal recursive (naive) approach, without dynamic programming and memoization ******
 
+    // In this approach we consider all the possible conditions and their outcomes. For each item, we check whether we should
+    // take it or not, ultimately optimally solving the problem.
+    // In this approach, we are guaranteed to get global optima, but it is inefficient, because of huge number of calculations.
+    // Time complexity: O(2^n), as for each item we have to decide whether to take the item or not. To make the decision, we'll
+    // have to do all the calculations for each of the decisions, and then take the decision which leads to a better result (increased value).
+    // Space complexity: O(n), as at any given time, in worst case we have to hold all the items in function call stack
+
     public static int binaryKnapsackOptimalRecursive(int[] values, int[] weights, int capacity) {
         return binaryKnapsackOptimalRecursiveLooper(values, weights, values.length - 1, capacity);  //Starting with last index
     }

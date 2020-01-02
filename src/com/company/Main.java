@@ -7,10 +7,9 @@ public class Main {
     public static void main(String[] args) {
 
 
-        System.out.println(BinaryKnapsack.binaryKnapsackGreedy(new int[]{60, 100, 120}, new int[]{10, 20, 30}, 50));
+        System.out.println(BinaryKnapsack.binaryKnapsackOptimalRecursive(new int[]{60, 100, 120, 124, 345}, new int[]{10, 20, 30, 4, 8}, 55));
 
-
-//        System.out.println("Number of operations: " + Fibonacci.numberOfOperations);
+        System.out.println("Number of operations: " + BinaryKnapsack.numberOfOperations);
 
 //        PerformanceMeasurer.measurePerformance(() ->
 //                        Fibonacci.fibonacciRecursiveWithDynamicProgramming(25),

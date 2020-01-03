@@ -104,7 +104,8 @@ public class BinaryKnapsack {
     // take it or not, ultimately optimally solving the problem.
     // In this approach, we are guaranteed to get global optima. It is also kind of efficient, as instead of always doing
     // calculations, we are saving the calculated results, and reusing them later, if needed.
-    // Time complexity: O(n*c), where n is the number of items, and c is the capacity, as we are calculating the values only for each item-capacity combo only.
+    // Time complexity: Worst case O(n*c), where n is the number of items, and c is the capacity, as we are calculating the values only for each item-capacity combo,
+    // if that result is required to find the global maxima.
     // Even though for each item we have to decide whether to take the item or not. To make the decision, we won't
     // have to do all the calculations for each of the decisions, as we can reuse results of older saved calculations,
     // and then take the decision which leads to a better result (increased value).
@@ -127,7 +128,7 @@ public class BinaryKnapsack {
             if (dynamicProgrammingMemo[currentItemIndex][capacity] != null)
                 return dynamicProgrammingMemo[currentItemIndex][capacity];
 
-            else if (weights[currentItemIndex] > capacity)          //If current item weight is more than capacity, we can't take it. So return weight up to previous item
+            else if (weights[currentItemIndex] > capacity)          //If current item weight is more than capacity, we can't take it. So return value up to previous item
                 totalValue = binaryKnapsackDynamicProgrammingAndMemoizationLooper(values, weights, currentItemIndex - 1, capacity);
 
             else {
@@ -147,6 +148,60 @@ public class BinaryKnapsack {
         dynamicProgrammingMemo[currentItemIndex][capacity] = totalValue;    //Memoize
 
         numberOfOperations++;
+
+        return totalValue;
+    }
+
+
+    //      ****** Dynamic programming approach, bottom-up ******
+
+    // In this approach we consider all the possible conditions and their outcomes. For each item, we check whether we should
+    // take it or not, ultimately optimally solving the problem.
+    // In this approach, we are guaranteed to get global optima. It is also kind of inefficient, as we are solving all
+    // the sub-problems (each item-capacity combo), regardless of whether they are needed to solve the main problem (global maxima) or not.
+    // Time complexity: O(n*c) in all cases, where n is the number of items, and c is the capacity, as we are calculating the values for each item-capacity combo.
+    // Even though for each item we have to decide whether to take the item or not. To make the decision, we won't
+    // have to do all the calculations for each of the decisions, as we can reuse results of older saved calculations,
+    // and then take the decision which leads to a better result (increased value).
+    // Space complexity: O(n*c), as we are storing the calculation results in the memo.
+
+    public static int binaryKnapsackDynamicProgrammingBottomUp(int[] values, int[] weights, int capacity) {
+
+        dynamicProgrammingMemo = new Integer[values.length][capacity + 1];  //+1, as array is 0 indexed
+        int totalValue = 0;
+
+        //For each item
+        for (int currentItemIndex = 0; currentItemIndex < values.length; currentItemIndex++) {
+
+            //For each capacity
+            for (int currentCapacity = 0; currentCapacity <= capacity; currentCapacity++) {
+
+                if (currentCapacity <= 0)   //Base case. If capacity is 0, return 0
+                    totalValue = 0;
+                else {
+
+                    //In case of first item, if we do not take the item, total value is 0. Otherwise total value is equal to value till previous item
+                    int totalValueIfNotTakingCurrentItem = ((currentItemIndex == 0) ? 0 : dynamicProgrammingMemo[currentItemIndex - 1][currentCapacity]);
+
+                    //If current item weight is more than capacity, we can't take it.
+                    if (weights[currentItemIndex] > currentCapacity)
+                        totalValue = totalValueIfNotTakingCurrentItem;
+                    else {
+                        //If we can take current item, check whether we should take it. Check which is bigger, if we take the current item, or if we don't
+
+                        //If we take current item, then total value is equal to value of current item + value of remaining capacity
+                        int totalValueIfTakingCurrentItem = ((currentItemIndex == 0) ? values[currentItemIndex] : values[currentItemIndex] + dynamicProgrammingMemo[currentItemIndex - 1][currentCapacity - weights[currentItemIndex]]);
+
+                        //We take the max of the above two values
+                        totalValue = Math.max(totalValueIfNotTakingCurrentItem, totalValueIfTakingCurrentItem);
+                    }
+                }
+
+                dynamicProgrammingMemo[currentItemIndex][currentCapacity] = totalValue;     //Memoize
+
+                numberOfOperations++;
+            }
+        }
 
         return totalValue;
     }

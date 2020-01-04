@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
 
 
-        TowerOfHanoi.towerOfHanoiDynamicProgramming(4, 'A', 'B', 'C');
+        TowerOfHanoi.towerOfHanoiDynamicProgramming(5, 'A', 'B', 'C');
 
         System.out.println("Number of operations: " + TowerOfHanoi.numberOfOperations);
 

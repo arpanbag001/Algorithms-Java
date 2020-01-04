@@ -23,8 +23,8 @@ public class Stairs {
 
         if (stairToReach < 0)                               //If stair to reach is negative, number of ways is 0
             return 0;
-        else if (stairToReach == 0 || stairToReach == 1)    //If stair to reach is 0, number of ways is 1, by staying there.
-            return 1;                                       //Also if stair to reach is 1, number of ways is 1, by taking 1 step
+        else if (stairToReach == 0)                         //If stair to reach is 0, number of ways is 1, by staying there.
+            return 1;
 
         //Check memo
         if (dynamicProgrammingMemo[stairToReach] != null)

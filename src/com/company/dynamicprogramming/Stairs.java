@@ -9,13 +9,13 @@ public class Stairs {
     Problem statement:
     Count ways to reach the n’th stair
     There are n stairs, a person standing at the bottom wants to reach the top.
-    The person can climb either 1 stair or 2 stairs at a time. Count the number of ways, the person can reach the top.
+    The person can climb only steps passed in "allowedStepsToTake" at a time. Count the number of ways, the person can reach the top.
      */
 
 
-    //Time complexity: Without memoization, O(2^n) and with memoization O(n) where n is stair to reach
+    //Time complexity: Without memoization, O(m^n) and with memoization O(n) where m is size of allowedStepsToTake and n is stair to reach
     //Space complexity: O(n)
-    public static int findNumOfWaysToReachStair(int stairToReach) {
+    public static int findNumOfWaysToReachStair(int stairToReach, int[] allowedStepsToTake) {
 
         //Initializing memo
         if (dynamicProgrammingMemo == null)
@@ -30,14 +30,17 @@ public class Stairs {
         if (dynamicProgrammingMemo[stairToReach] != null)
             return dynamicProgrammingMemo[stairToReach];
 
-        //Number of ways to reach current stair by taking 1 step is same as number of ways to reach (current-1)th stair
-        int numOfWaysToReachCurrentStairTaking1StepFromPreviousStair = findNumOfWaysToReachStair(stairToReach - 1);
+        int numOfWaysToReachCurrentStair = 0;
 
-        //Number of ways to reach current stair by taking 2 steps is same as number of ways to reach (current-2)th stair
-        int numOfWaysToReachCurrentStairTaking2StepsFromPreviousStair = findNumOfWaysToReachStair(stairToReach - 2);
+        //Explore all allowed steps
+        for (int x : allowedStepsToTake) {
 
-        //Number of ways to reach current stair is combination of both the previous ways
-        int numOfWaysToReachCurrentStair = numOfWaysToReachCurrentStairTaking1StepFromPreviousStair + numOfWaysToReachCurrentStairTaking2StepsFromPreviousStair;
+            //Number of ways to reach current stair by taking x steps is same as number of ways to reach (current - x)th stair
+            int numOfWaysToReachCurrentStairByTakingXSteps = findNumOfWaysToReachStair(stairToReach - x, allowedStepsToTake);
+
+            //Number of ways to reach current stair is combination of number of ways for each allowed steps
+            numOfWaysToReachCurrentStair += numOfWaysToReachCurrentStairByTakingXSteps;
+        }
 
         dynamicProgrammingMemo[stairToReach] = numOfWaysToReachCurrentStair;      //Memoize
 

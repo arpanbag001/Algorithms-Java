@@ -1,16 +1,15 @@
 package com.company;
 
-import com.company.dynamicprogramming.BinaryKnapsack;
-import com.company.dynamicprogramming.TowerOfHanoi;
+import com.company.dynamicprogramming.Stairs;
 
 public class Main {
 
     public static void main(String[] args) {
 
 
-        TowerOfHanoi.towerOfHanoiDynamicProgramming(5, 'A', 'B', 'C');
+        System.out.println(Stairs.findNumOfWaysToReachStair(12));
 
-        System.out.println("Number of operations: " + TowerOfHanoi.numberOfOperations);
+        System.out.println("Number of operations: " + Stairs.numberOfOperations);
 
 //        PerformanceMeasurer.measurePerformance(() ->
 //                        Fibonacci.fibonacciRecursiveWithDynamicProgramming(25),

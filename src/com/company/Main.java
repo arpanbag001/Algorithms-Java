@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.backtracking.NQueens;
 import com.company.dynamicprogramming.Stairs;
 import com.company.sorting.HeapSort;
 
@@ -10,9 +11,10 @@ public class Main {
     public static void main(String[] args) {
 
 
-        System.out.println(Arrays.toString(HeapSort.doHeapSort(new int[]{11, 2, 9, 13, 57, 25, 17, 1, 90, 3})));
+        for (int[] row : NQueens.solveNQueens(4))
+            System.out.println(Arrays.toString(row));
 
-//        System.out.println("Number of operations: " + Stairs.numberOfOperations);
+        System.out.println("Number of operations: " + NQueens.numberOfOperations);
 
 //        PerformanceMeasurer.measurePerformance(() ->
 //                        Fibonacci.fibonacciRecursiveWithDynamicProgramming(25),

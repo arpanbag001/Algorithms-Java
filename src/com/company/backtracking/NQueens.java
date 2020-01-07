@@ -2,6 +2,20 @@ package com.company.backtracking;
 
 public class NQueens {
 
+
+    /*
+
+    The problem can by solved by this simple steps:
+    1. For any row in a column, check if queen can be placed here, by checking previous columns.
+    2. If queen can't be placed,keep looping through the next rows, and do all these steps for each of them.
+    3. If queen can be placed, place the queen there, and keep solving the problem by placing queens in next columns
+        and check whether that leads to the solution.
+    4. If it leads to the solution, congrats!
+    5. If it doesn't, remove the queen from current position.
+    6. Keep looping through the next rows, and do all these steps for each of them.
+
+     */
+
     public static int numberOfOperations;
 
     public static int[][] solveNQueens(int n) {
